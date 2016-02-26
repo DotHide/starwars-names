@@ -30,12 +30,16 @@
     "chai": "3.5.0",
     "commitizen": "2.5.0",
     "cz-conventional-changelog": "1.1.5",
+    "ghooks": "1.0.3",
     "mocha": "2.4.5",
     "semantic-release": "^4.3.5"
   },
   "config": {
     "commitizen": {
       "path": "node_modules/cz-conventional-changelog"
+    },
+    "ghooks": {
+      "pre-commit": "npm run test:single"
     }
   }
 }
