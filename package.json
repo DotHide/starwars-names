@@ -4,6 +4,7 @@
   "description": "Get random Star Wars names",
   "main": "src/index.js",
   "scripts": {
+    "commit": "git-cz",
     "test": "mocha src/index.test.js -w",
     "semantic-release": "semantic-release pre && npm publish && semantic-release post"
   },
@@ -26,7 +27,14 @@
   },
   "devDependencies": {
     "chai": "3.5.0",
+    "commitizen": "2.5.0",
+    "cz-conventional-changelog": "1.1.5",
     "mocha": "2.4.5",
     "semantic-release": "^4.3.5"
+  },
+  "config": {
+    "commitizen": {
+      "path": "node_modules/cz-conventional-changelog"
+    }
   }
 }
