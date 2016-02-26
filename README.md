@@ -1,5 +1,5 @@
 ## starwars-names
-这是一个让我学会「如何编写一个 JS 开源库」的实践项目，其中涵盖了许多的软件项目工程管理的方法和工具，包括 **版本提交、测试编写、自动版本发行、代码提交公约、持续构建(CI)、提交前测试、测试覆盖率及报告** 等，真是受益匪浅，在此做个英译中作为分享。
+这是一个让我学会「如何编写一个 JS 开源库」的实践项目，其中涵盖了许多的社区项目工程管理的方法和工具，包括 **版本提交、测试编写、自动版本发行、代码提交公约、持续构建(CI)、提交前测试、测试覆盖率及报告** 等，真是受益匪浅，在此做个英译中作为分享。
 
 [![Build Status](https://travis-ci.org/DotHide/starwars-names.svg?branch=master)](https://travis-ci.org/DotHide/starwars-names)
 
@@ -9,7 +9,7 @@
 2. 配置 NPM，并创建 package.json 文件
 3. 创建开源库，并添加依赖项
 4. 提交开源库至 GitHub
-5. 发布到 NPM（https://www.npmjs.com）
+5. 发布到 [NPM Repo](https://www.npmjs.com)
 6. 发布一个发行版本（Release Version）至 GitHub
 7. 发布一个发行版本至 NPM
 8. 发布一个 beta 版本
