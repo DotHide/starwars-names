@@ -22,5 +22,6 @@
   "homepage": "https://github.com/DotHide/starwars-names#readme",
   "dependencies": {
     "unique-random-array": "1.0.0"
-  }
+  },
+  "devDependencies": {}
 }
