@@ -1,6 +1,6 @@
 ## StarWars Names
 
-[![Build Status](https://travis-ci.org/DotHide/starwars-names.svg?branch=master)](https://travis-ci.org/DotHide/starwars-names) [![codecov.io](https://codecov.io/github/DotHide/starwars-names/coverage.svg?branch=master)](https://codecov.io/github/DotHide/starwars-names?branch=master)
+[![Travis](https://img.shields.io/travis/DotHide/starwars-names.svg?style=flat-square)](https://travis-ci.org/DotHide/starwars-names) [![Codecov](https://img.shields.io/codecov/c/github/DotHide/starwars-names.svg?style=flat-square)](https://codecov.io/github/DotHide/starwars-names?branch=master) [![npm](https://img.shields.io/npm/v/starwars-names-dothide.svg?style=flat-square)](https://www.npmjs.com/package/starwars-names-dothide) [![npm](https://img.shields.io/npm/dm/starwars-names-dothide.svg?style=flat-square)](https://www.npmjs.com/package/starwars-names-dothide) [![npm](https://img.shields.io/npm/l/starwars-names-dothide.svg?style=flat-square)](https://www.npmjs.com/package/starwars-names-dothide)
 
 GitHub 怎么用？Issue 还能通过 commit 来同步关闭？版本号是怎么定义的？如何自动发行版本？Commit 还有公约和规范？怎样做持续构建？……
 
