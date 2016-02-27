@@ -58,7 +58,8 @@ console.log(starWarsNames.random());
 ### 技能 1 账户建立
 GitHub 账号作为新时代的必要装备散发着其迷人的光环，但是有账号和会用是两码事，所以这个光环能不能发挥作用取决于账号底下内容的丰富程度。看完这篇文章我相信会对 GitHub 账号有新的认识，至少对我而言是这样。此外，我们还需要建立 npmjs 账号，用于发布 NPM 包（最终我们的开源项目将能以 `$ npm install starwars-names` 的方式进行安装）。
 
-注册 GitHub 账号，并新建代码库（+ New repository），名称填写为 starwars-names，并填写描述后得到如下页面的代码：
+#### GitHub 账户
+访问 https://github.com/，注册 GitHub 账号，并新建代码库（+ New repository），名称填写为 starwars-names，并填写描述后得到如下页面的代码：
 ```shell
 echo "# starwars-names" >> README.md
 git init
@@ -67,15 +68,19 @@ git commit -m "first commit"
 git remote add origin git@github.com:<yourUserName>/starwars-names.git
 git push -u origin master
 ```
+
 在项目目录中直接执行以上代码，进行首次提交，然后回头看项目的页面就编程代码了。
+
+#### NPM 账户
+访问 https://www.npmjs.com/，注册 NPM 账号。
 
 ### 技能 2 账户配置
 #### 设置 GitHub 环境变量
 其实主要有以下几项设置：
 ```bash
 # 设置账户信息
-$ git config --global user.name 'Jack Zhang'
-$ git config --global user.email 'dothide@gmail.com'
+$ git config --global user.name '<yourName>'
+$ git config --global user.email '<yourEmail>'
 
 # 设置命令别名
 $ git config --global alias.st status
@@ -88,13 +93,21 @@ $ git config --global alias.co checkout
 #### 设置 npm 环境变量
 由于我们后面要做 `$ npm init` 来生成 `package.json` 文件，但文件中的许多变量设置可以通过 npm 环境变量来设置，以省去每次输入的麻烦。我们去 https://docs.npmjs.com/misc/config 找到 init- 开头的四个变量
 ```shell
-$ npm set init-author-name "Jack Zhang"
-$ npm set init-author-email "dothide@gmail.com"
-$ npm set init-author-url "https://github.com/DotHide"
+$ npm set init-author-name "<yourName>"
+$ npm set init-author-email "<yourEmail>"
+$ npm set init-author-url "https://github.com/<yourUserName>"
 $ npm set init-license "MIT"
 # 关于 license 选择可以参看这篇博客(http://blog.jobbole.com/44175/)
+
+# 然后在本地添加你的账号
+$ npm adduser
+Username: # 输入 NPM 账户名
+Password: # 输入密码
+Email: (this IS public) # 输入你的邮箱（会公开）
 ```
 > 没有 npm 命令？去 [NodeJS](https://nodejs.org/en/) 上下载 Node
+
+设置后，输入 `$ cat ~/.npmrc` 可以查看设置情况
 
 #### 初始化 package.json
 接着执行 `$ npm init`
@@ -139,7 +152,7 @@ starwars-names/               * 项目目录
   "Aayla Secura",
   "Admiral Ackbar",
   "Admiral Thrawn",
-  ...
+  // ...
   "Zam Wesell",
   "Zayne Carrick",
   "Zuckuss"
