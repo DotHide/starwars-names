@@ -7,14 +7,24 @@ module.exports = {
   random: random
 }
 
-function random(number) {
-  if (number === undefined) {
+function random(input) {
+  if (input === undefined) {
     return getRandomItem();
-  } else {
+  } else if (typeof input === 'number') {
     var randomItems = [];
-    for(var i = 0; i < number; i++) {
+    for (var i = 0; i < input; i++) {
       randomItems.push(getRandomItem());
     }
     return randomItems;
+  } else {
+    if (input.length === 1) {
+      var filteredStarWarsNames =
+        starWarsNames.filter(function(item) {
+          return item.charAt(0) === input.toUpperCase();
+        });
+      return uniqueRandomArray(filteredStarWarsNames)();
+    } else {
+      throw 'One char only!';
+    }
   }
 }
