@@ -2,36 +2,43 @@
 
 [![Travis](https://img.shields.io/travis/DotHide/starwars-names.svg?style=flat-square)](https://travis-ci.org/DotHide/starwars-names) [![Codecov](https://img.shields.io/codecov/c/github/DotHide/starwars-names.svg?style=flat-square)](https://codecov.io/github/DotHide/starwars-names?branch=master) [![npm](https://img.shields.io/npm/v/starwars-names-dothide.svg?style=flat-square)](https://www.npmjs.com/package/starwars-names-dothide) [![npm](https://img.shields.io/npm/dm/starwars-names-dothide.svg?style=flat-square)](https://www.npmjs.com/package/starwars-names-dothide) [![npm](https://img.shields.io/npm/l/starwars-names-dothide.svg?style=flat-square)](https://www.npmjs.com/package/starwars-names-dothide)
 
-GitHub 怎么用？Issue 还能通过 commit 来同步关闭？版本号是怎么定义的？如何自动发行版本？Commit 还有公约和规范？怎样做持续构建？……
+GitHub 怎么用？Issue 还能通过 Commit 来同步关闭？版本号是怎么定义的？如何自动发行版本？Commit 还有公约和规范？怎样做持续构建？……
 
-也许在工作中您会遇到诸如此类的问题，不论您是菜鸟还是老手，这篇文章也许都能让你在其中找到一些有价值可借鉴的东西，这是一个教我学会「如何编写一个 JS 开源库」的实践项目，同时也让我领悟了许多开源项目的工程管理方法和工具，包括 **版本管理、测试编写、自动版本发行、代码提交公约、持续构建（CI）、提交前测试、测试覆盖率及其报告** 等，总体感觉受益匪浅，在此对教程原文[[1]](#教程原文（Source）)表示感谢，并决定将视频中的大量知识通过写作分享给诸位，在学习过程中我也加入了一些自己的思考，将视频内容转换成了更通俗的语言，没时间看视频的朋友兴许可以瞧瞧这里，对于简单的技能可以跳过，相关技能的章节已做了电梯，可以直达进行阅读。如果您觉得本文有用，请您赏颗⭐️
+也许在工作中您会遇到诸如此类的问题，不论您是菜鸟还是老手，但愿这篇文章能让你在其中找到一些有价值或可借鉴的东西，这源自一个教我学会「如何编写一个 JS 开源库」的实践项目，同时也让我领悟了许多开源项目的工程管理概念、思路及方法，包括 **版本管理、测试编写、自动版本发行、代码提交公约、持续构建（CI）、提交前测试、测试覆盖率及其报告** 等，总体感觉受益匪浅，在此对教程原文[[1]](#教程原文)表示感谢，并决定将视频中的大量知识通过写作记录下来，在学习过程中我也加入了一些自己的思考，将视频内容转换成了更通俗的语言，没时间看视频的朋友兴许可以瞧瞧这里，对于简单的技能可以跳过，相关技能的章节已做了电梯，可以直达进行阅读。**注意**：在您阅读任何技能章节之前建议您先看看项目背景，它非常简单，但它对您理解后面的内容很有帮助。
+
+最后，如果您觉得本文有用，请您赏颗⭐️，非常感谢
 
 它让我学会了以下 **新技能（√）**：
 
-* 【[技能 1](#技能 1 账户建立)】**账户建立**：建立 GitHub 及 npmjs 账号
-* 【[技能 2](#技能 2 账户配置)】**账户配置**：配置 NPM，并构建第一个库
-* 【[技能 3](#技能 3 代码提交)】**代码提交**：提交开源库至 GitHub  
-  【[技能 3.1](#免密登录（SSH Key）)】免密登录：无需每次输入密码登录 Linux 主机
-* 【技能 4】**代码发布**：发布到 [NPM Repo](https://www.npmjs.com)
-* 【技能 5】**版本管理1**：发布一个发行版本（Release Version）至 GitHub
-* 【技能 6】**版本管理2**：发布一个发行版本至 NPM
-* 【技能 7】**版本管理3**：发布一个 beta 版本
-* 【技能 8】**单元测试**：利用 Mocha 和 Chai 建立单元测试
-* 【技能 9】**自动版本发行**：利用 semantic-release 自动化发行
-* 【技能 10】**代码提交公约**：利用 commitizen 编写提交公约
-* 【技能 11】**持续构建（CI）1**：利用 TravisCI 持续构建
-* 【技能 12】**提交前测试**：利用 ghooks 做提交前自动化测试
-* 【技能 13】**测试覆盖率1**：利用 Istanbul 做代码覆盖
-* 【技能 14】**测试覆盖率2**：添加代码覆盖率报告
-* 【技能 15】**GH特效**：在 README 中添加徽章
-* 【技能 16】**ES6支持1**：添加 ES6 支持
-* 【技能 17】**ES6支持2**使用 Mocha & Babel 对测试添加 ES6 支持
-* 【技能 18】**持续构建（CI）2**：Travis 上的限制分支构建
+* 【[技能 1](#技能-1-账户建立)】**账户建立**：建立 GitHub 及 npmjs 账号
+* 【[技能 2](#技能-2-账户配置)】**账户配置**：配置 NPM，并构建第一个库
+* 【[技能 3](#技能-3-代码提交)】**代码提交**：提交开源库至 GitHub  
+  【[技能 3.1](#免密登录)】免密登录：无需每次输入密码登录 Linux 主机
+* 【[技能 4](#技能-4-库发布)】**库发布**：将开源库发布到 [NPM Repo](https://www.npmjs.com)
+* 【[技能 5](#技能-5-版本管理)】**版本管理**：包括版本号定义，版本标签及版本发行  
+  【[技能 5.1](#版本号定义)】版本号定义：版本号每个数字的意义  
+  【[技能 5.2](#版本标签)】版本标签：为版本加标签发布至 GitHub  
+  【[技能 5.3](#版本发行)】版本发行：发布一个版本至 NPM  
+* 【技能 6】**版本发行**：发布一个发行版本（或测试版本）至 NPM 
+* 【技能 7】**单元测试**：利用 Mocha 和 Chai 建立单元测试
+* 【技能 8】**自动版本发行**：利用 semantic-release 自动化发行
+* 【技能 9】**代码提交公约**：利用 commitizen 编写提交公约
+* 【技能 10】**持续构建（CI）1**：利用 TravisCI 持续构建
+* 【技能 11】**提交前测试**：利用 ghooks 做提交前自动化测试
+* 【技能 12】**测试覆盖率1**：利用 Istanbul 做代码覆盖
+* 【技能 13】**测试覆盖率2**：添加代码覆盖率报告
+* 【技能 14】**GH特效**：在 README 中添加徽章
+* 【技能 15】**ES6支持1**：添加 ES6 支持
+* 【技能 16】**ES6支持2**：使用 Mocha & Babel 对测试添加 ES6 支持
+* 【技能 17】**持续构建（CI）2**：Travis 上的限制分支构建
 
+### 项目背景
 项目的名称叫 starwars-names，有两个非常简单的功能，但重点不在这里，重点是借助这样一个微型 JS 库（Micro JS Lib），向人们展示整个过程，使我们能应用到大型 JS 库（Huge JS Lib）中去：
 
-1. 列出星球大战人物名（ all ）
-2. 随机输出一个人物名（ random() ）
+1. 列出星球大战人物名（ all ） 
+> 从 `starwars-names.json` 文件中取出所有人物名
+2. 随机输出一个人物名（ random() ） 
+> 从所有人物名中随机输出一个
 
 最终，你可以这样使用它：
 ```js
@@ -216,7 +223,7 @@ starwars-names/               * 项目目录
 
 保存后你的机器无需每次都输入账户密码即可提交代码了。
 
-#### 免密登录（SSH Key）
+#### 免密登录
 这个过程就如免密登录 Linux 主机的方法一样，这里简单扯几句。如果你希望访问某台 Linux 主机 / 服务器时不需要每次都输入密码，可以在该台机器上做如下操作：
 
 * 建立 authorized_keys 文件 `$ touch ~/.ssh/authorized_keys`
@@ -247,5 +254,67 @@ starwars-names/               * 项目目录
 └── README.md                 * README 文件
 ```
 
-### 教程原文（Source）
+### 技能 4 库发布
+现在我们可以把库发布到 NPM 上供别人下载了，具体步骤如下： `$ npm publish` 
+> 但要注意的是 NPM 包名是全网唯一的，不能重复，因此我们需要修改 `package.json` 中的 `name` 属性，如："starwars-name-yourUserName"
+
+发布后，我们可以通过 `$ npm info starwars-name-yourUserName` 来查看库的信息，如果有说明你的库已经发布成功了，你也可以通过该命令查看任何一个已有库的信息。
+
+现在就可以通过 `$ npm install starwars-names-yourUserName` 来安装库到你的其他工程中去了。用法就同[项目背景](#项目背景)中描述的那样。
+
+###  技能 5 版本管理
+#### 版本号定义
+标准版本号的基本格式如：`v1.0.0` ，其中的每个数字都有重要的意义：
+
+* 第一个数字叫主版本（Major Version），主要用于革命性的更新，这种更新中往往含有许多的破坏性变化（BREAKING CHANGES）；
+* 第二个数字是次要版本发布（Minor Release），主要用于增加新的特性（features），但不包含任何破坏性变化；
+* 第三个数字是补丁发布（Patch Release），主要用于修复 BUGs。
+
+测试版本号的基本格式如：`v1.2.0-beta.0` 它是在标准版本号的基础上增加测试版本类型和号码，一般测试类型可以分为两种，内测版和公测版：
+
+* 内测版一般称为 alpha 版，可以写成：`v1.2.0-alpha.0`
+* 公测的称为 beta 版，可以写成：`v1.2.0-beta.0`
+* 主要注意的是，假如是基于 `v1.1.0` 上增加不成熟新功能（feature）的情况，那么该版本号应该定义为： `v1.2.0-beta.0` ，假如是基于 `v1.1.0` 上修复BUG，但不确定修复效果是否会让大众满意，就需要将版本号定义为： `v1.1.1-beta.0`
+* 版本类型后面的数字是测试迭代版本号
+
+#### 版本标签
+我们需要将代码发布到 GitHub ，并给当前已完成的库打上标签（tag），具体如下：
+```bash
+$ git tag 1.0.0
+$ git push --tags
+```
+
+我们打开 GitHub 项目主页，可以在 Tags 选项下找到 1.0.0 版本，另外 release 中也有了一条版本记录。
+
+#### 版本发行
+接着我们试图给当前的库增加一个新功能，这个功能非常简单，就是在 `starwars-names.json` 文件中插入一条数据（比如你的用户名），假设这实现了一个新的功能（feature），因此根据前面的版本号定义，我们需要相应地更新 `package.json` 文件中的 `version` 字段，接着为代码打一个新的标签，这次就是 `v1.1.0` ，注意我们还要，接着我们再重复一遍「版本标签」的步骤，并再做一次「库发布」，总的说来版本发行的步骤就是重复地按顺序做以下几件事：
+
+```
+1. 修改代码至确认无误（后面会说到测试，并利用相关工具在提交前测试）
+2. 更新 package.json 的 version 字段
+3. git add .
+4. git cm -m "更新内容"
+5. git tag <newVersionNo>
+6. git push
+7. git push --tags
+8. npm publish
+```
+
+同样的，发布一个测试版本的步骤如下：
+```
+1. 修改代码
+2. 更新 package.json 的 version 字段
+3. git add .
+4. git cm -m "更新内容"
+5. git tag <newVersionNo>-beta.0
+6. git push
+7. git push --tags
+8. npm publish --tag beta
+```
+
+相比之下，与发布正式版本的不同之处仅在于打标签时注意版本号定义，以及在 NPM 发布时加上 `--tag beta` 即可。
+
+综上所述，不论是发布一个正式版本还是测试版本，都需要经过非常复杂的步骤流程，且中间不能出错，否则会引起版本混乱，这无疑给开发带来了新的问题和障碍，因此我们需要一个更好的工具来帮助我们完成以上重复劳动。
+
+### 教程原文
 [1] [《How to Write an Open Source JavaScript Library》](https://egghead.io/series/how-to-write-an-open-source-javascript-library) by [Kent C. Dodds](http://kentcdodds.com)
