@@ -544,8 +544,7 @@ $ npm i -D commitizen cz-conventional-changelog
 
 执行 `$ nrc` 后，系统需要回答以下问题：
 ```shell
-Select the type of change that you're committing: 
-
+Select the type of change that you are committing: 
 > feat: 新特性（feature）提交
 > fix: 修复 BUG 提交
 > docs: 文档提交
