@@ -1,8 +1,8 @@
 ## StarWars Names
 
-[![Travis](https://img.shields.io/travis/DotHide/starwars-names.svg?style=flat-square)](https://travis-ci.org/DotHide/starwars-names) [![Codecov](https://img.shields.io/codecov/c/github/DotHide/starwars-names.svg?style=flat-square)](https://codecov.io/github/DotHide/starwars-names?branch=master) [![npm](https://img.shields.io/npm/v/starwars-names-dothide.svg?style=flat-square)](https://www.npmjs.com/package/starwars-names-dothide) [![npm](https://img.shields.io/npm/dm/starwars-names-dothide.svg?style=flat-square)](https://www.npmjs.com/package/starwars-names-dothide) [![npm](https://img.shields.io/npm/l/starwars-names-dothide.svg?style=flat-square)](https://www.npmjs.com/package/starwars-names-dothide)
+[![Travis](https://img.shields.io/travis/DotHide/starwars-names.svg?style=flat-square)](https://travis-ci.org/DotHide/starwars-names) [![Codecov](https://img.shields.io/codecov/c/github/DotHide/starwars-names.svg?style=flat-square)](https://codecov.io/github/DotHide/starwars-names?branch=master) [![npm](https://img.shields.io/npm/v/starwars-names-dothide.svg?style=flat-square)](https://www.npmjs.com/package/starwars-names-dothide) [![npm](https://img.shields.io/npm/dm/starwars-names-dothide.svg?style=flat-square)](https://www.npmjs.com/package/starwars-names-dothide) [![npm](https://img.shields.io/npm/l/starwars-names-dothide.svg?style=flat-square)](https://www.npmjs.com/package/starwars-names-dothide) [![Commitizen friendly](https://img.shields.io/badge/commitizen-friendly-brightgreen.svg?style=flat-square)](http://commitizen.github.io/cz-cli/)
 
-GitHub 怎么用？Issue 还能通过 Commit 来同步关闭？版本号是怎么定义的？如何自动发行版本？Commit 还有公约和规范？怎样做持续构建？……
+GitHub 怎么用？Issue 还能通过 Commit 来同步关闭？版本号是怎么定义的？如何自动发行版本？Commit 还有公约和规范？怎样做持续构建？如何在提交之前就做测试？测试覆盖率是什么？……
 
 也许在工作中您会遇到诸如此类的问题，不论您是菜鸟还是老手，但愿这篇文章能让你在其中找到一些有价值或可借鉴的东西，这源自一个教我学会「如何编写一个 JS 开源库」的实践项目，同时也让我领悟了许多开源项目的工程管理概念、思路及方法，包括 **版本管理、测试编写、自动版本发行、代码提交公约、持续构建（CI）、提交前测试、测试覆盖率及其报告** 等，总体感觉受益匪浅，在此对教程原文[[1]](#教程原文)表示感谢，并决定将视频中的大量知识通过写作记录下来，在学习过程中我也加入了一些自己的思考，将视频内容转换成了更通俗的语言，没时间看视频的朋友兴许可以瞧瞧这里，对于简单的技能可以跳过，相关技能的章节已做了电梯，可以直达进行阅读。**注意**：在您阅读任何技能章节之前建议您先看看[项目背景](#项目背景)，它非常简单，但它对您理解后面的内容很有帮助。
 
@@ -445,7 +445,7 @@ starwars-names/               * 项目目录
 └── README.md                 * README 文件
 ```
 
-Chai 的相关 API 文档可以查看这里（http://chaijs.com/api/）
+> Chai 的相关 API 文档可以查看这里（http://chaijs.com/api/）
 
 ### 技能 7 自动版本发行
 很高兴你能阅读到里，同时也很高兴地告诉你「技能 5」中提到的版本发行过程将可以被更好地管理起来，你需要用到 semantic-release 这个工具。我们先来安装它： `$ npm i -D semantic-release-cli` 。
@@ -515,6 +515,122 @@ branches:
 ```
 
 到这一步我们就完成了自动发布，但还不算完全做到自动版本发布，因为我们还需要另一个工具来为我们自动定义版本，请接着往下看。
+
+### 技能 8 代码提交公约
+上一篇最后提到的工具还有个非常重要的作用，就是「代码提交公约」，遵守了公约后，不仅能帮助我们自动识别版本，甚至还可以自动关闭 GitHub 上对应的 Issue，这样一来针对 Issue 的管理也会变得更容易和高效。它是 Angular 团队推荐使用的代码提交工具 `commitizen` 和 `cz-conventional-changelog` 具体可以参看 [Git Commit Guidelines](https://github.com/angular/angular.js/blob/master/CONTRIBUTING.md#-git-commit-guidelines) ，我们先安装它们：
+
+```bash
+$ npm i -D commitizen cz-conventional-changelog
+```
+
+然后修改 `package.json` 文件，添加 commit 脚本及配置：
+```js
+{
+  ...
+  "script": {
+    "commit": "git-cz",
+    ...
+  },
+  ...
+  "config": {
+    "commitizen": {
+      "path": "node_modules/cz-conventional-changelog"
+    }
+  }
+}
+```
+
+接着我们执行：`$ git status`，查看文件变化，并执行：`$ git add .` 将所有变化加入暂存区。此时，我们将使用：`$ npm run commit` 代替 `$ git commit -m ""` 来做提交。你也可以编辑 `~/.bashrc` 或 `~/.zchrc` 文件并在底部加入 `alias nrc='npm run commit'` 来创建快捷命令。
+
+执行 `$ nrc` 后，系统需要回答以下问题：
+```bash
+Select the type of change that you're committing: 
+> feat: 新特性（feature）提交
+> fix: 修复 BUG 提交
+> docs: 文档提交
+> style: 代码风格修改提交（如：删除多余空格，代码格式化，增加缺失的分号等）
+> refactor: 代码重构提交（既没有修复 BUG 也不是增加一个新功能，只是调整实现方式）
+> perf: 提升性能的代码提交
+> test: 添加测试提交
+> chore: 修改构建过程、配置文件或者增加辅助工具和库时的提交
+# 选择提交类型，将对应版本号的定义，这里我们选择 chore
+
+Denote the scope of this change ($location, $browser, $compile, etc)
+# 意思是本次提交的范围是什么（括号里指的是 Angular 库本身的相关代码范围，我们可以自定义自己库的有关范围，如针对某个方法的，就写类名-方法名，针对修改配置的，就写 config，针对代码发布的，就写 releasing 等。）
+# 这里我们输入 Releasing
+
+White a short, imperative tense description of the change:
+# 大意是写一个简短的说明描述本次提交，可以留空，但建议填写
+
+Provide a longer description of the change:
+# 提供完整的提交描述，可以留空
+
+List any breaking changes or issues closed by this change:
+# 列出任何破坏性变更或本次提交解决的问题
+# 我们可以打开 GitHub 手动新建一个 Issue，假如该 Issue 默认是第一个，我们在这里输入 Closes #1 就可以关联关闭该 Issue 了
+# 如果想同时关闭多个 Issue，则可以输入 Closes #1, #2, #5
+```
+
+完成以上步骤后，我们输入：`$ git log` 来查看日志，发现最上面的一条记录了我们前面输入的内容
+
+此时，我们可以直接 `$ git push` 提交，但为了再实践一次整个过程，我们可以在此时尝试给这个库增加一个新功能：给 random 增加一个数字传入参数，以输出给定数字个数的随机人物名。如：
+```js
+console.log(random(3));
+
+// Output
+[
+  "Bossk",
+  "Watto",
+  "Natasi Daala"
+]
+```
+
+利用 TDD 的思路，先从测试开始写起：
+```js
+// index.test.js
+  ...
+
+  describe('random', function() {
+    ...
+    // 在 random 范围内增加一个新的测试用例
+    it('should return an array of random items if passed a number', function() {
+      var randomItems = starWars.random(3);
+      expect(randomItems).to.have.length(3);
+      randomItems.forEach(function(item) {
+        expect(starWars.all).to.include(item);
+      });
+    });
+
+  ...
+```
+
+然后我们执行： `npm t`，显然测试将报错，接着写实现：
+```js
+// index.js
+var uniqueRandomArray = require('unique-random-array');
+var starWarsNames = require('./starwars-names.json');
+var getRandomItem = uniqueRandomArray(starWarsNames);
+
+module.exports = {
+  all: starWarsNames,
+  random: random
+}
+
+function random(input) {
+  if (input === undefined) {
+    return getRandomItem();
+  } else {
+    var randomItems = [];
+    for (var i = 0; i < input; i++) {
+      randomItems.push(getRandomItem());
+    }
+    return randomItems;
+  }
+}
+```
+
+写完后，测试顺利通过！这时就能再实践一次上面的过程了，我们无需考虑版本的变化，无需考虑要在哪里写版本日志，所有的一些都交给工具完成，我们执行：`$ nrc`，又是刚才的问题，只是在第一步我们选择 **feat** ，后面随意发挥，当然也可以再新建两个 Issue 试试，我们将在下一章「持续构建」里 Push 代码  :)
+
 
 ### 教程原文
 [1] [《How to Write an Open Source JavaScript Library》](https://egghead.io/series/how-to-write-an-open-source-javascript-library) by [Kent C. Dodds](http://kentcdodds.com)
