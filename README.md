@@ -506,7 +506,7 @@ before_install:
 before_script:
   - npm prune
 script:
-  - npm run test:single // 我们在这里加入测试脚本，这样跑 CI 的时候就会自动做测试了
+  - npm run test:single # 我们在这里加入测试脚本，这样跑 CI 的时候就会自动做测试了
 after_success:
   - npm run semantic-release
 branches:
@@ -543,8 +543,9 @@ $ npm i -D commitizen cz-conventional-changelog
 接着我们执行：`$ git status`，查看文件变化，并执行：`$ git add .` 将所有变化加入暂存区。此时，我们将使用：`$ npm run commit` 代替 `$ git commit -m ""` 来做提交。你也可以编辑 `~/.bashrc` 或 `~/.zchrc` 文件并在底部加入 `alias nrc='npm run commit'` 来创建快捷命令。
 
 执行 `$ nrc` 后，系统需要回答以下问题：
-```bash
+```shell
 Select the type of change that you're committing: 
+
 > feat: 新特性（feature）提交
 > fix: 修复 BUG 提交
 > docs: 文档提交
