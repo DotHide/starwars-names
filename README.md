@@ -4,7 +4,7 @@
 
 GitHub 怎么用？Issue 还能通过 Commit 来同步关闭？版本号是怎么定义的？如何自动发行版本？Commit 还有公约和规范？怎样做持续构建？……
 
-也许在工作中您会遇到诸如此类的问题，不论您是菜鸟还是老手，但愿这篇文章能让你在其中找到一些有价值或可借鉴的东西，这源自一个教我学会「如何编写一个 JS 开源库」的实践项目，同时也让我领悟了许多开源项目的工程管理概念、思路及方法，包括 **版本管理、测试编写、自动版本发行、代码提交公约、持续构建（CI）、提交前测试、测试覆盖率及其报告** 等，总体感觉受益匪浅，在此对教程原文[[1]](#教程原文)表示感谢，并决定将视频中的大量知识通过写作记录下来，在学习过程中我也加入了一些自己的思考，将视频内容转换成了更通俗的语言，没时间看视频的朋友兴许可以瞧瞧这里，对于简单的技能可以跳过，相关技能的章节已做了电梯，可以直达进行阅读。**注意**：在您阅读任何技能章节之前建议您先看看项目背景，它非常简单，但它对您理解后面的内容很有帮助。
+也许在工作中您会遇到诸如此类的问题，不论您是菜鸟还是老手，但愿这篇文章能让你在其中找到一些有价值或可借鉴的东西，这源自一个教我学会「如何编写一个 JS 开源库」的实践项目，同时也让我领悟了许多开源项目的工程管理概念、思路及方法，包括 **版本管理、测试编写、自动版本发行、代码提交公约、持续构建（CI）、提交前测试、测试覆盖率及其报告** 等，总体感觉受益匪浅，在此对教程原文[[1]](#教程原文)表示感谢，并决定将视频中的大量知识通过写作记录下来，在学习过程中我也加入了一些自己的思考，将视频内容转换成了更通俗的语言，没时间看视频的朋友兴许可以瞧瞧这里，对于简单的技能可以跳过，相关技能的章节已做了电梯，可以直达进行阅读。**注意**：在您阅读任何技能章节之前建议您先看看[项目背景](#项目背景)，它非常简单，但它对您理解后面的内容很有帮助。
 
 最后，如果您觉得本文有用，请您赏颗⭐️，非常感谢
 
@@ -258,7 +258,61 @@ starwars-names/               * 项目目录
 现在我们可以把库发布到 NPM 上供别人下载了，具体步骤如下： `$ npm publish` 
 > 但要注意的是 NPM 包名是全网唯一的，不能重复，因此我们需要修改 `package.json` 中的 `name` 属性，如："starwars-name-yourUserName"
 
-发布后，我们可以通过 `$ npm info starwars-name-yourUserName` 来查看库的信息，如果有说明你的库已经发布成功了，你也可以通过该命令查看任何一个已有库的信息。
+发布后，我们可以通过 `$ npm info starwars-name-yourUserName` 来查看库的信息，如果显示类似如下的信息说明你的库已经发布成功了，你也可以通过该命令查看任何一个已有库的信息。
+```js
+{ name: 'starwars-names-dothide',
+  description: 'Get random Star Wars names',
+  'dist-tags': { latest: '1.3.0', beta: '1.2.0-beta.0' },
+  versions: [ '1.0.0', '1.1.0', '1.2.0-beta.0', '1.2.0', '1.3.0' ],
+  maintainers: [ 'dothide <dothide@gmail.com>' ],
+  time:
+   { modified: '2016-02-27T03:41:48.985Z',
+     created: '2016-02-26T05:21:29.682Z',
+     '1.0.0': '2016-02-26T05:21:29.682Z',
+     '1.1.0': '2016-02-26T05:41:15.158Z',
+     '1.2.0-beta.0': '2016-02-26T07:04:27.804Z',
+     '1.2.0': '2016-02-26T08:28:15.093Z',
+     '1.3.0': '2016-02-27T03:41:48.985Z' },
+  homepage: 'https://github.com/DotHide/starwars-names#readme',
+  keywords: [ 'random', 'starwars' ],
+  repository:
+   { type: 'git',
+     url: 'git+https://github.com/DotHide/starwars-names.git' },
+  author: 'DotHide <dothide@gmail.com> (https://github.com/DotHide)',
+  bugs: { url: 'https://github.com/DotHide/starwars-names/issues' },
+  license: 'MIT',
+  readmeFilename: 'README.md',
+  users: { dothide: true },
+  version: '1.3.0',
+  main: 'src/index.js',
+  scripts:
+   { commit: 'git-cz',
+     'check-coverage': 'istanbul check-coverage --statements 100 --branches 100 --functions 100 --lines 100',
+     'report-coverage': 'cat ./coverage/lcov.info | codecov',
+     test: 'mocha src/index.test.js -w',
+     'test:single': 'istanbul cover _mocha --report lcovonly -- -R spec src/index.test.js',
+     'semantic-release': 'semantic-release pre && npm publish && semantic-release post' },
+  dependencies: { 'unique-random-array': '1.0.0' },
+  devDependencies:
+   { chai: '3.5.0',
+     codecov: '1.0.1',
+     commitizen: '2.5.0',
+     'cz-conventional-changelog': '1.1.5',
+     ghooks: '1.0.3',
+     istanbul: '0.4.2',
+     mocha: '2.4.5',
+     'semantic-release': '^4.3.5' },
+  config:
+   { commitizen: { path: 'node_modules/cz-conventional-changelog' },
+     ghooks: { 'pre-commit': 'npm run test:single && npm run check-coverage' } },
+  gitHead: '7857cc8bc4087ea35c230166f2cea5c673a82f93',
+  dist:
+   { shasum: '1031eda818e31ab00cee1036b75fdcf50eddef92',
+     tarball: 'http://registry.npmjs.org/starwars-names-dothide/-/starwars-names-dothide-1.3.0.tgz' },
+  directories: {} }
+```
+
+值得注意的是，其中的 `'dist-tags'` 中记录了当前最新的版本号和测试版本号，具体版本号定义将在下一篇讨论。
 
 现在就可以通过 `$ npm install starwars-names-yourUserName` 来安装库到你的其他工程中去了。用法就同[项目背景](#项目背景)中描述的那样。
 
