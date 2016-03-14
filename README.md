@@ -585,7 +585,7 @@ console.log(random(3));
 ```
 
 利用 TDD 的思路，先从测试开始写起：
-```js
+```
 // index.test.js
   ...
 
@@ -599,7 +599,7 @@ console.log(random(3));
         expect(starWars.all).to.include(item);
       });
     });
-
+  }
   ...
 ```
 
@@ -699,11 +699,11 @@ $ npm i -D ghooks
 ```
 
 然后，在 `package.json` 文件中进行配置
-```json
+```js
 // package.json
 ...
 "config": {
-  "ghooks" {
+  "ghooks": {
     "pre-commit": "npm run test:single" // 配置测试脚本
   }
 }
