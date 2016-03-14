@@ -734,5 +734,49 @@ function random(input) {
 
 好了，我们将代码改回来，然后再练习一遍标准提交流程吧~
 
+### 技能 10 测试覆盖率 1
+我理解的测试覆盖率就是我们前面所写的测试代码对整体程序的覆盖面，有点辩证逻辑的感觉在里面，意思就是正过来要对，反过来也要不出错。测试覆盖率我们常用的工具是 Istanbul，很有意思的名字，从[阮一峰的博客](http://www.ruanyifeng.com/blog/)中学习到，伊斯坦布尔是土耳其的最大城市，因土耳其地毯世界闻名，然而地毯又是用来覆盖的，所以才有这样一个名字。
+
+接着，我们先安装 Istanbul，`$ npm i -D istanbul` ，然后我们再次编辑 `package.json` 文件，修改原来的 `test:single` 脚本，将原来直接使用 `mocha` 命令改为使用 istanbul 提供的 `_mocha` 命令来执行测试脚本：
+
+```json
+"test:single": "istanbul cover _mocha src/index.test.js"
+```
+
+修改后，我们先来执行一下看看 `$ npm run test:single` 
+
+```
+> istanbul cover _mocha src/index.test.js
+
+
+
+  starwars-names
+    all
+      ✓ should be an array of strings
+      ✓ should contain `DotHide`
+    random
+      ✓ should return a random item from the starWars.all
+      ✓ should return an array of random items if passed a number
+      ✓ should return a random item from the starWars by a prefix char
+      ✓ should throw an error if you enter char > 1
+
+
+  6 passing (16ms)
+
+=============================================================================
+Writing coverage object [/Users/madz/Develop/Libraries/starwars-names/coverage/coverage.json]
+Writing coverage reports at [/Users/madz/Develop/Libraries/starwars-names/coverage]
+=============================================================================
+
+=============================== Coverage summary ===============================
+Statements   : 100% ( 45/45 )
+Branches     : 100% ( 8/8 )
+Functions    : 100% ( 16/16 )
+Lines        : 100% ( 45/45 )
+================================================================================
+```
+
+Great! ~ ：）
+
 ### 教程原文
 [1] [《How to Write an Open Source JavaScript Library》](https://egghead.io/series/how-to-write-an-open-source-javascript-library) by [Kent C. Dodds](http://kentcdodds.com)
