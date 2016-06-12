@@ -447,7 +447,7 @@ starwars-names/               * 项目目录
 > Chai 的相关 API 文档可以查看这里（http://chaijs.com/api/）
 
 ### 技能 7 自动版本发行
-很高兴你能阅读到里，同时也很高兴地告诉你「技能 5」中提到的版本发行过程将可以被更好地管理起来，你需要用到 semantic-release 这个工具。我们先来安装它： `$ npm i -D semantic-release-cli` 。
+很高兴你能阅读到里，同时也很高兴地告诉你「技能 5」中提到的版本发行过程将可以被更好地管理起来，你需要用到 semantic-release 这个工具。我们先来安装它： `$ npm i -g semantic-release-cli` 。
 
 接着需要对它进行设置： `$ semantic-release-cli setup` ，你需要如实回答它的问题：
 ```bash
